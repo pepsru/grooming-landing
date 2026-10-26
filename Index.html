@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!--
+  ============================================================
+  AURA PET SALON — лендинг «Код доверия. Анатомия груминга»
+  Single-file production build. GitHub Pages ready.
+  ------------------------------------------------------------
+  ИНСТРУКЦИЯ ПО ВИЗУАЛУ:
+  Создайте папку /images и положите файлы:
+    01-hero.jpg    (16:9)  — визуал №1 из чата (грумер + ретривер)
+    02-fur-macro.jpg (1:1) — визуал №2 из чата (макро шерсть)
+    03-interior.jpg  (16:9) — визуал №3 из чата (интерьер студии)
+    04-cat.jpg       (1:1) — визуал №4 из чата (мейн-кун)
+    05-expert.jpg    (4:5) — генерация по промпту P1 (README)
+    06-spa.jpg       (16:9) — генерация по промпту P2 (README)
+    07-tools.jpg     (1:1) — генерация по промпту P3 (README)
+  Пока файлов нет — автоматически подставятся тематические
+  фото-фолбэки, сайт НЕ будет выглядеть сломанным никогда.
+  ============================================================
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURA Pet Salon — Код доверия. Анатомия груминга | Груминг собак и кошек без стресса</title>
+<meta name="description" content="Студия бережного груминга AURA: анатомическая стрижка, SPA-терапия, разбор колтунов без боли. Без наркоза и намордников. Собаки и кошки. Запись на сеанс.">
+<meta property="og:title" content="AURA Pet Salon — Анатомия груминга">
+<meta property="og:description" content="Груминг как работа с нервной системой питомца. Fear-free подход.">
+<meta property="og:image" content="images/01-hero.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"AURA Pet Salon","description":"Студия бережного груминга собак и кошек","telephone":"+7 (999) 123-45-67","address":{"@type":"PostalAddress","addressLocality":"Москва","streetAddress":"ул. Тёплая, 12"},"priceRange":"₽₽₽"}
+</script>
+<style>
+/* ============ DESIGN TOKENS ============ */
+:root{
+  --milk:#F7F3EC; --milk-2:#EFE8DC; --ink:#201D19; --ink-soft:#5C554B;
+  --sage:#8FA383; --sage-d:#66795C; --terra:#C0714B;
+  --line:rgba(32,29,25,.14); --card:#FFFDF9;
+  --ff-h:'Playfair Display',serif; --ff-b:'Manrope',sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:var(--ff-b);background:var(--milk);color:var(--ink);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.container{width:min(1160px,92%);margin:0 auto}
+::selection{background:var(--sage);color:#fff}
+
+/* ============ TYPOGRAPHY ============ */
+.overline{font-size:12px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--sage-d);display:flex;align-items:center;gap:14px}
+.overline::before{content:"";width:36px;height:1px;background:var(--sage-d)}
+h1,h2,h3{font-family:var(--ff-h);font-weight:600;line-height:1.12;letter-spacing:-.01em}
+h1{font-size:clamp(38px,6.4vw,78px)}
+h2{font-size:clamp(30px,4.2vw,52px)}
+h3{font-size:22px}
+.lead{font-size:clamp(16px,1.6vw,19px);color:var(--ink-soft);max-width:56ch}
+.em{font-style:italic;color:var(--terra)}
+
+/* ============ BUTTONS ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:17px 34px;background:var(--ink);color:var(--milk);border:1px solid var(--ink);border-radius:999px;font-family:var(--ff-b);font-weight:700;font-size:15px;letter-spacing:.04em;cursor:pointer;transition:all .35s var(--ease);position:relative;overflow:hidden}
+.btn:hover{background:var(--sage-d);border-color:var(--sage-d);transform:translateY(-2px);box-shadow:0 14px 30px rgba(102,121,92,.28)}
+.btn:active{transform:translateY(0)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{background:var(--ink);color:var(--milk);border-color:var(--ink)}
+.btn-light{background:var(--milk);color:var(--ink);border-color:var(--milk)}
+.btn-light:hover{background:var(--terra);border-color:var(--terra);color:#fff}
+
+/* ============ HEADER ============ */
+header{position:fixed;inset:0 0 auto 0;z-index:100;transition:all .4s var(--ease);padding:22px 0}
+header.scrolled{background:rgba(247,243,236,.92);backdrop-filter:blur(14px);padding:12px 0;box-shadow:0 1px 0 var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font-family:var(--ff-h);font-size:24px;font-weight:700;letter-spacing:.14em}
+.logo span{color:var(--sage-d)}
+.nav-links{display:flex;gap:30px;font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.nav-links a{position:relative;opacity:.75;transition:opacity .3s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--terra);transition:width .35s var(--ease)}
+.nav-links a:hover{opacity:1}
+.nav-links a:hover::after{width:100%}
+.nav .btn{padding:12px 26px;font-size:13px}
+.burger{display:none;background:none;border:0;cursor:pointer;width:34px;height:26px;position:relative;z-index:120}
+.burger span{position:absolute;left:0;width:100%;height:2px;background:var(--ink);transition:all .35s var(--ease)}
+.burger span:nth-child(1){top:2px}.burger span:nth-child(2){top:12px}.burger span:nth-child(3){top:22px}
+body.menu-open .burger span:nth-child(1){top:12px;transform:rotate(45deg)}
+body.menu-open .burger span:nth-child(2){opacity:0}
+body.menu-open .burger span:nth-child(3){top:12px;transform:rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;background:var(--milk);z-index:110;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 8%;transform:translateY(-100%);transition:transform .5s var(--ease)}
+body.menu-open .mobile-menu{transform:translateY(0)}
+.mobile-menu a{font-family:var(--ff-h);font-size:34px;padding:8px 0;border-bottom:1px solid var(--line)}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:var(--milk);overflow:hidden}
+.bg{position:absolute;inset:-8% 0;background-size:cover;background-position:center;background-color:var(--sage-d)}
+.hero .bg{inset:-10% 0}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(24,21,17,.34) 0%,rgba(24,21,17,.18) 40%,rgba(24,21,17,.82) 100%)}
+.hero-inner{position:relative;z-index:2;padding:150px 0 64px;width:min(1160px,92%);margin:0 auto}
+.hero .overline{color:#E4D9C6}.hero .overline::before{background:#E4D9C6}
+.hero h1{margin:22px 0 20px;max-width:14ch;text-shadow:0 4px 40px rgba(0,0,0,.35)}
+.hero .lead{color:rgba(247,243,236,.88);max-width:46ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:16px;margin:36px 0 14px}
+.hero-note{font-size:13px;color:rgba(247,243,236,.62)}
+.hero-stats{position:relative;z-index:2;border-top:1px solid rgba(247,243,236,.22);margin-top:44px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding-top:26px}
+.stat b{font-family:var(--ff-h);font-size:clamp(26px,3vw,40px);font-weight:600;display:block;color:#F3EADB}
+.stat span{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(247,243,236,.66)}
+.scroll-hint{position:absolute;right:4%;bottom:38px;z-index:3;color:rgba(247,243,236,.7);font-size:11px;letter-spacing:.3em;text-transform:uppercase;writing-mode:vertical-rl;animation:hint 2.6s infinite var(--ease)}
+@keyframes hint{0%,100%{transform:translateY(0);opacity:.7}50%{transform:translateY(10px);opacity:1}}
+
+/* ============ SECTIONS BASE ============ */
+section{padding:110px 0;position:relative}
+.sec-head{max-width:760px;margin-bottom:56px}
+.sec-head .overline{margin-bottom:18px}
+.sec-head h2{margin-bottom:18px}
+
+/* ============ PHILOSOPHY ============ */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
+.q-list{margin:30px 0;display:grid;gap:14px}
+.q-list li{padding-left:34px;position:relative;color:var(--ink-soft)}
+.q-list li::before{content:"—";position:absolute;left:0;color:var(--terra);font-weight:800}
+.media{position:relative}
+.media-frame{position:relative;overflow:hidden;border-radius:6px;aspect-ratio:4/5;box-shadow:0 30px 70px rgba(32,29,25,.18)}
+.media-frame .bg{inset:0;transition:transform 1.2s var(--ease)}
+.media-frame:hover .bg{transform:scale(1.05)}
+.media-card{position:absolute;left:-34px;bottom:34px;background:var(--card);padding:22px 26px;border-radius:6px;max-width:270px;box-shadow:0 18px 44px rgba(32,29,25,.16);font-size:14.5px;font-style:italic;font-family:var(--ff-h);color:var(--ink)}
+.media-card b{display:block;font-family:var(--ff-b);font-style:normal;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage-d);margin-bottom:8px}
+
+/* ============ EXPERT ============ */
+#master{background:var(--milk-2)}
+.expert-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:start}
+.expert-photo{aspect-ratio:4/5;border-radius:6px;overflow:hidden;position:relative;box-shadow:0 26px 60px rgba(32,29,25,.2)}
+.expert-photo img{width:100%;height:100%;object-fit:cover}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:14px 26px;margin:30px 0}
+.facts li{font-size:15px;padding:14px 0 14px 30px;border-top:1px solid var(--line);position:relative}
+.facts li::before{content:"✦";position:absolute;left:2px;top:14px;color:var(--sage-d)}
+blockquote{font-family:var(--ff-h);font-style:italic;font-size:clamp(20px,2.2vw,26px);line-height:1.45;border-left:2px solid var(--terra);padding-left:26px;color:var(--ink)}
+
+/* ============ QUOTE BAND (fur macro) ============ */
+.band{position:relative;color:var(--milk);padding:120px 0;overflow:hidden}
+.band::after{content:"";position:absolute;inset:0;background:rgba(28,24,19,.78)}
+.band .container{position:relative;z-index:2;text-align:center}
+.band blockquote{border:0;padding:0;max-width:820px;margin:0 auto;font-size:clamp(24px,3.4vw,40px);color:#F3EADB}
+.band cite{display:block;margin-top:22px;font-style:normal;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:rgba(247,243,236,.6)}
+
+/* ============ SERVICES ============ */
+.srv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.srv{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:34px 28px;transition:all .4s var(--ease);display:flex;flex-direction:column}
+.srv:hover{transform:translateY(-8px);box-shadow:0 26px 60px rgba(32,29,25,.12);border-color:var(--sage)}
+.srv .num{font-family:var(--ff-h);font-style:italic;font-size:15px;color:var(--terra);margin-bottom:22px}
+.srv .ico{width:44px;height:44px;stroke:var(--sage-d);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-bottom:20px}
+.srv h3{margin-bottom:12px}
+.srv p{font-size:14.5px;color:var(--ink-soft);flex:1}
+.srv .meta{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--sage-d)}
+
+/* ============ MARQUEE ============ */
+.marquee{background:var(--sage-d);color:var(--milk);overflow:hidden;padding:20px 0;transform:rotate(-1.2deg) scale(1.02)}
+.marquee-track{display:flex;gap:0;width:max-content;animation:mq 30s linear infinite}
+.marquee span{font-family:var(--ff-h);font-size:20px;letter-spacing:.12em;text-transform:uppercase;padding:0 26px;white-space:nowrap}
+.marquee i{font-style:normal;color:var(--terra)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ============ AUDIENCE ============ */
+.aud-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.aud{border:1px solid var(--line);border-radius:8px;padding:32px;background:transparent;transition:all .4s var(--ease)}
+.aud:hover{background:var(--card);border-color:var(--sage)}
+.aud h3{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;font-size:20px}
+.aud h3 svg{width:22px;height:22px;stroke:var(--terra);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;flex:none;margin-top:3px}
+.aud p{font-size:15px;color:var(--ink-soft)}
+.aud-note{margin-top:34px;font-family:var(--ff-h);font-style:italic;font-size:19px;color:var(--ink-soft);max-width:70ch}
+
+/* ============ FORMAT ============ */
+#format{color:var(--milk);overflow:hidden;padding:150px 0}
+#format .bg{inset:-12% 0}
+#format::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,21,17,.88) 0%,rgba(24,21,17,.55) 55%,rgba(24,21,17,.25) 100%)}
+#format .container{position:relative;z-index:2}
+.format-card{max-width:560px}
+.format-card .overline{color:#E4D9C6}.format-card .overline::before{background:#E4D9C6}
+.format-card h2{margin:18px 0 26px}
+.format-list{display:grid;gap:16px;margin-bottom:34px}
+.format-list li{padding-left:32px;position:relative;font-size:16px;color:rgba(247,243,236,.9)}
+.format-list li::before{content:"";position:absolute;left:0;top:9px;width:14px;height:14px;border:1px solid var(--terra);border-radius:50%}
+.format-list li::after{content:"";position:absolute;left:4px;top:13px;width:6px;height:6px;background:var(--terra);border-radius:50%}
+.badges{display:flex;gap:12px;flex-wrap:wrap}
+.badge{border:1px solid rgba(247,243,236,.35);border-radius:999px;padding:9px 20px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(247,243,236,.85)}
+
+/* ============ PROCESS ============ */
+.proc-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:start}
+.steps{counter-reset:s;display:grid;gap:0}
+.step{display:grid;grid-template-columns:76px 1fr;gap:24px;padding:30px 0;border-top:1px solid var(--line)}
+.step:last-child{border-bottom:1px solid var(--line)}
+.step .n{font-family:var(--ff-h);font-style:italic;font-size:44px;color:var(--sage);line-height:1}
+.step h3{margin-bottom:8px}
+.step p{font-size:15px;color:var(--ink-soft)}
+.step .t{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);font-weight:800}
+.proc-media{position:sticky;top:110px;aspect-ratio:1/1;border-radius:6px;overflow:hidden;box-shadow:0 26px 60px rgba(32,29,25,.18)}
+
+/* ============ PRICES ============ */
+#prices{background:var(--milk-2)}
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:900px;margin:0 auto}
+.price{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:44px 40px;position:relative;transition:all .4s var(--ease)}
+.price:hover{transform:translateY(-6px);box-shadow:0 30px 70px rgba(32,29,25,.14)}
+.price.feat{border:1.5px solid var(--sage-d);box-shadow:0 24px 60px rgba(102,121,92,.18)}
+.price .tag{position:absolute;top:-14px;left:40px;background:var(--sage-d);color:#fff;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:7px 16px;border-radius:999px}
+.price h3{font-size:26px;margin-bottom:6px}
+.price .sum{font-family:var(--ff-h);font-size:44px;font-weight:600;margin:16px 0 22px}
+.price .sum small{font-size:15px;font-family:var(--ff-b);font-weight:600;color:var(--ink-soft)}
+.price ul{display:grid;gap:11px;margin-bottom:32px}
+.price li{font-size:14.5px;color:var(--ink-soft);padding-left:26px;position:relative}
+.price li::before{content:"✓";position:absolute;left:0;color:var(--sage-d);font-weight:800}
+.price .btn{width:100%}
+.price-note{text-align:center;margin-top:30px;font-size:14px;color:var(--ink-soft);font-style:italic}
+
+/* ============ REVIEWS ============ */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rev{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:32px}
+.rev .stars{color:var(--terra);letter-spacing:4px;margin-bottom:16px}
+.rev p{font-size:15px;color:var(--ink-soft);margin-bottom:22px;font-style:italic}
+.rev b{font-size:14px}
+.rev span{display:block;font-size:12.5px;color:var(--sage-d);letter-spacing:.08em;text-transform:uppercase}
+
+/* ============ LEAD MAGNET ============ */
+.leadmag{position:relative;color:var(--milk);overflow:hidden;padding:110px 0;text-align:center}
+.leadmag::after{content:"";position:absolute;inset:0;background:rgba(102,121,92,.82)}
+.leadmag .container{position:relative;z-index:2}
+.leadmag h2{max-width:700px;margin:0 auto 18px}
+.leadmag p{color:rgba(247,243,236,.85);max-width:52ch;margin:0 auto 34px}
+
+/* ============ FORM ============ */
+#booking{background:var(--ink);color:var(--milk)}
+#booking .overline{color:var(--sage)}#booking .overline::before{background:var(--sage)}
+#booking .lead{color:rgba(247,243,236,.7)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px 30px;margin-top:50px}
+.field{position:relative}
+.field.full{grid-column:1/-1}
+.field label{display:block;font-size:11.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,243,236,.55);margin-bottom:10px}
+.field input,.field select,.field textarea{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(247,243,236,.28);color:var(--milk);font-family:var(--ff-b);font-size:17px;padding:10px 2px 14px;outline:none;transition:border-color .3s;border-radius:0}
+.field select option{color:var(--ink)}
+.field textarea{resize:vertical;min-height:70px}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--sage)}
+.field.err input{border-color:var(--terra)}
+.field .msg{font-size:12px;color:var(--terra);margin-top:6px;display:none}
+.field.err .msg{display:block}
+.consent{grid-column:1/-1;display:flex;gap:12px;align-items:flex-start;font-size:13px;color:rgba(247,243,236,.6)}
+.consent input{width:18px;height:18px;accent-color:var(--sage);margin-top:2px}
+.consent a{text-decoration:underline;cursor:pointer}
+.form-actions{grid-column:1/-1;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.form-actions .btn{padding:19px 46px}
+
+/* ============ FOOTER ============ */
+footer{background:#171411;color:rgba(247,243,236,.6);padding:60px 0 40px;font-size:14px}
+.f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(247,243,236,.12)}
+.f-grid .logo{color:var(--milk);margin-bottom:12px}
+.f-grid h4{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,243,236,.4);margin-bottom:16px}
+.f-grid a{display:block;padding:4px 0;transition:color .3s}
+.f-grid a:hover{color:var(--sage)}
+.f-bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;font-size:12.5px}
+.f-bottom a{cursor:pointer;text-decoration:underline}
+
+/* ============ MOBILE CTA BAR ============ */
+.cta-bar{position:fixed;left:0;right:0;bottom:0;z-index:90;background:rgba(247,243,236,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:none;transform:translateY(110%);transition:transform .45s var(--ease)}
+.cta-bar.show{transform:translateY(0)}
+.cta-bar .btn{width:100%}
+
+/* ============ MODALS ============ */
+.modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex}
+.modal-backdrop{position:absolute;inset:0;background:rgba(23,20,17,.7);backdrop-filter:blur(4px)}
+.modal-box{position:relative;background:var(--milk);border-radius:10px;max-width:520px;width:100%;padding:46px 42px;max-height:84vh;overflow:auto;animation:pop .45s var(--ease)}
+@keyframes pop{from{transform:translateY(26px);opacity:0}to{transform:none;opacity:1}}
+.modal-box h3{font-size:28px;margin-bottom:14px}
+.modal-box p{font-size:14.5px;color:var(--ink-soft);margin-bottom:12px}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:0;font-size:26px;cursor:pointer;color:var(--ink-soft);line-height:1}
+.success-ico{width:64px;height:64px;border-radius:50%;background:var(--sage-d);color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:22px}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:1024px){
+  .srv-grid{grid-template-columns:1fr 1fr}
+  .split,.expert-grid,.proc-grid{grid-template-columns:1fr;gap:50px}
+  .proc-media{position:static;max-width:520px}
+  .media-card{left:16px}
+}
+@media(max-width:768px){
+  section{padding:76px 0}
+  .nav-links,.nav .btn{display:none}
+  .burger{display:block}
+  .hero-stats{grid-template-columns:1fr 1fr;gap:26px}
+  .srv-grid,.aud-grid,.price-grid,.rev-grid,.form-grid{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr}
+  .f-grid{grid-template-columns:1fr;gap:28px}
+  .cta-bar{display:block}
+  .scroll-hint{display:none}
+  #format::after{background:rgba(24,21,17,.8)}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header id="header">
+  <div class="container nav">
+    <a href="#" class="logo">AURA<span>·</span>PET</a>
+    <nav class="nav-links">
+      <a href="#philosophy">Философия</a>
+      <a href="#master">Мастер</a>
+      <a href="#services">Услуги</a>
+      <a href="#format">Формат</a>
+      <a href="#prices">Цены</a>
+    </nav>
+    <a href="#booking" class="btn">Записаться</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#philosophy">Философия</a>
+  <a href="#master">Мастер</a>
+  <a href="#services">Услуги</a>
+  <a href="#format">Формат</a>
+  <a href="#prices">Цены</a>
+  <a href="#booking">Записаться</a>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero" style="padding:0">
+  <div class="bg" data-parallax data-bg="images/01-hero.jpg" data-fallback="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=2400&q=80"></div>
+  <div class="hero-inner">
+    <div class="overline reveal">Груминг-студия · Fear-free подход</div>
+    <h1 class="reveal d1">Код доверия.<br><span class="em">Анатомия груминга.</span></h1>
+    <p class="lead reveal d2">Авторская методика работы с шерстью, мышечными зажимами и нервной системой собак и кошек. Без наркоза, намордников и спешки.</p>
+    <div class="hero-cta reveal d3">
+      <a href="#booking" class="btn btn-light">Записаться на сеанс</a>
+      <a href="#philosophy" class="btn btn-ghost" style="color:var(--milk);border-color:rgba(247,243,236,.4)">Узнать о подходе</a>
+    </div>
+    <div class="hero-note reveal d4">Оставьте заявку — администратор свяжется с вами в течение дня и подберёт удобное окно.</div>
+    <div class="hero-stats reveal d4">
+      <div class="stat"><b>12 лет</b><span>практики</span></div>
+      <div class="stat"><b>4 800+</b><span>питомцев</span></div>
+      <div class="stat"><b>0</b><span>седативных средств</span></div>
+      <div class="stat"><b>98%</b><span>возвращаются</span></div>
+    </div>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</section>
+
+<!-- ================= PHILOSOPHY ================= -->
+<section id="philosophy">
+  <div class="container split">
+    <div class="reveal">
+      <div class="overline">О чём наша работа</div>
+      <h2 style="margin:18px 0 20px">Мы работаем не с шерстью. Мы работаем с&nbsp;доверием.</h2>
+      <p class="lead">Мы разбираем не абстрактную «стрижку», а живые механизмы поведения:</p>
+      <ul class="q-list">
+        <li>почему собака дрожит на столе, хотя «дома смелая»;</li>
+        <li>почему колтуны возвращаются в одних и тех же зонах;</li>
+        <li>почему кошка кусается именно на сушке;</li>
+        <li>почему после салона питомец «обиделся» на три дня.</li>
+      </ul>
+      <p class="lead">Шерсть и кожа — это карта адаптации животного к стрессу. Замороженный страх, боль от первого неудачного визита, привычка терпеть — всё это записывается в теле и в структуре шерсти. <b style="color:var(--ink)">Мы работаем с причиной, а не срезаем следствие.</b></p>
+    </div>
+    <div class="media reveal d2">
+      <div class="media-frame"><div class="bg" data-bg="images/04-cat.jpg" data-fallback="https://images.unsplash.com/photo-1615789591457-74a63394c99d?auto=format&fit=crop&w=1400&q=80"></div></div>
+      <div class="media-card"><b>Наблюдение</b>Стресс читается в теле раньше, чем в поведении. Мы умеем его видеть.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERT ================= -->
+<section id="master">
+  <div class="container expert-grid">
+    <div class="expert-photo reveal">
+      <img data-img="images/05-expert.jpg" data-fallback="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1200&q=80" alt="Анна Вереск — ведущий грумер студии AURA">
+    </div>
+    <div class="reveal d2">
+      <div class="overline">Ведущий специалист</div>
+      <h2 style="margin:18px 0 8px">Анна Вереск</h2>
+      <p style="font-weight:700;letter-spacing:.04em;color:var(--sage-d);margin-bottom:22px">Ветеринарный грумер · кинолог · Fear Free Professional</p>
+      <p class="lead">Создательница студии AURA и автор подхода «анатомия груминга». Позиционирование построено не через дипломы, а через практический результат: изменение качества жизни питомца, снятие телесных зажимов, возвращение спокойствия после процедур.</p>
+      <ul class="facts">
+        <li>12 лет практики, 4 800+ сеансов</li>
+        <li>Сертификация Fear Free Grooming</li>
+        <li>Стажировки у европейских практиков</li>
+        <li>Автор курса «Домашний уход без слёз»</li>
+      </ul>
+      <blockquote>«Если тело питомца показывает страх — мы не делаем вид, что всё в порядке. Мы меняем сценарий».</blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ================= QUOTE BAND (fur macro) ================= -->
+<div class="band">
+  <div class="bg" data-bg="images/02-fur-macro.jpg" data-fallback="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=2000&q=80"></div>
+  <div class="container">
+    <blockquote class="reveal">«Шерсть — это дневник питомца. Колтун под мышкой — это не грязь. Это запись о стрессе, которую можно прочитать и переписать».</blockquote>
+    <cite class="reveal d1">Анна Вереск · основательница AURA</cite>
+  </div>
+</div>
+
+<!-- ================= SERVICES ================= -->
+<section id="services">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="overline">Что будет на сеансе</div>
+      <h2>Четыре протокола работы с телом и шерстью</h2>
+    </div>
+    <div class="srv-grid">
+      <article class="srv reveal">
+        <div class="num">01</div>
+        <svg class="ico" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>
+        <h3>Анатомическая стрижка</h3>
+        <p>По направлениям роста остевого волоса и подшерстка, с учётом осанки, возраста и терморегуляции породы.</p>
+        <div class="meta">60–90 мин · от 3 500 ₽</div>
+      </article>
+      <article class="srv reveal d1">
+        <div class="num">02</div>
+        <svg class="ico" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        <h3>Разбор колтунов без боли</h3>
+        <p>Послойный разбор вместо срезания «под ноль»: кожа дышит, питомец не теряет защиту и не получает травму опыта.</p>
+        <div class="meta">+30 мин · от 1 200 ₽</div>
+      </article>
+      <article class="srv reveal d2">
+        <div class="num">03</div>
+        <svg class="ico" viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>
+        <h3>SPA-терапия и озон</h3>
+        <p>Распаривание, озонированная вода 38°, массаж себумных желез: шерсть и кожа восстанавливаются изнутри.</p>
+        <div class="meta">40 мин · от 2 500 ₽</div>
+      </article>
+      <article class="srv reveal d3">
+        <div class="num">04</div>
+        <svg class="ico" viewBox="0 0 24 24"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>
+        <h3>Экспресс-линька</h3>
+        <p>Выдув мёртвого подшерстка компрессором на низких оборотах. Дом без «шерстяных снегов», кожа без парника.</p>
+        <div class="meta">45 мин · от 2 000 ₽</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MARQUEE ================= -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Без наркоза <i>✦</i> Без намордника <i>✦</i> Без спешки <i>✦</i> Один питомец в студии <i>✦</i> Прозрачная стена для хозяев <i>✦</i></span>
+    <span>Без наркоза <i>✦</i> Без намордника <i>✦</i> Без спешки <i>✦</i> Один питомец в студии <i>✦</i> Прозрачная стена для хозяев <i>✦</i></span>
+  </div>
+</div>
+
+<!-- ================= AUDIENCE ================= -->
+<section id="audience">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="overline">Кому подойдёт</div>
+      <h2>Участвовать может любой питомец</h2>
+    </div>
+    <div class="aud-grid">
+      <div class="aud reveal"><h3><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Тревожным и «кусачим»</h3><p>Работаем в темпе питомца: паузы, подкрепление, десенсибилизация к фену и машинке. Ни одной фиксации силой.</p></div>
+      <div class="aud reveal d1"><h3><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Пожилым с артритом</h3><p>Ортопедические столы с подогревом, поддержки под грудь и суставы, короткие сессии с перерывами.</p></div>
+      <div class="aud reveal d2"><h3><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Кошкам с высоким стрессом</h3><p>Отдельная «кошачья» комната: без запаха собак, звука промышленных фенов и чужих взглядов.</p></div>
+      <div class="aud reveal d3"><h3><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Щенкам на первый груминг</h3><p>Адаптационный визит без стрижки: знакомство, тёплая ванна, сушка на руках. Психика остаётся целой.</p></div>
+    </div>
+    <p class="aud-note reveal">Специальная подготовка питомца не нужна. Главное — не делать вид, что «у него всё в порядке», если тело показывает обратное.</p>
+  </div>
+</section>
+
+<!-- ================= FORMAT ================= -->
+<section id="format">
+  <div class="bg" data-parallax data-bg="images/03-interior.jpg" data-fallback="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2400&q=80"></div>
+  <div class="container">
+    <div class="format-card reveal">
+      <div class="overline">Формат</div>
+      <h2>Студия, устроенная как тихая лаборатория</h2>
+      <ul class="format-list">
+        <li>Стационарная студия премиум-класса: отдельный бокс на одного питомца, прозрачная стена для хозяев.</li>
+        <li>Сеанс 1,5–3 часа индивидуально. Без конвейера и «потока» за спиной.</li>
+        <li>Ортопедические столы, тёплая вода 38°, тишина: никаких промышленных фенов рядом.</li>
+        <li>После сеанса — письменный план домашнего ухода на 30 дней.</li>
+      </ul>
+      <div class="badges"><span class="badge">вода 38°</span><span class="badge">тишина</span><span class="badge">один питомец</span><span class="badge">host-видеосвязь</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section id="process">
+  <div class="container proc-grid">
+    <div>
+      <div class="sec-head reveal" style="margin-bottom:34px">
+        <div class="overline">Как проходит визит</div>
+        <h2>Четыре шага сценария доверия</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><div class="n">01</div><div><div class="t">10–15 минут</div><h3>Знакомство</h3><p>Питомец исследует студию без процедур. Мы читаем телесные маркеры: дыхание, тонус, точки зажима.</p></div></div>
+        <div class="step reveal d1"><div class="n">02</div><div><div class="t">10 минут</div><h3>Диагностика шерсти и кожи</h3><p>Карта колтунов, тип остевого волоса, состояние кожи. План и точная цена согласуются с хозяином до начала работ.</p></div></div>
+        <div class="step reveal d2"><div class="n">03</div><div><div class="t">в темпе питомца</div><h3>Процедуры</h3><p>Паузы, подкрепление, низкие обороты техники. Стрижка, SPA, когти, уши — по протоколу, выбранному на диагностике.</p></div></div>
+        <div class="step reveal d3"><div class="n">04</div><div><div class="t">15 минут</div><h3>Дебрифинг хозяина</h3><p>Что мы увидели в теле, какие зоны рискуют к следующему сезону, письменный план ухода на 30 дней.</p></div></div>
+      </div>
+    </div>
+    <div class="proc-media reveal d2"><div class="bg" style="inset:0" data-bg="images/07-tools.jpg" data-fallback="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1400&q=80"></div></div>
+  </div>
+</section>
+
+<!-- ================= PRICES ================= -->
+<section id="prices">
+  <div class="container">
+    <div class="sec-head reveal" style="text-align:center;margin-inline:auto">
+      <div class="overline" style="justify-content:center">Стоимость</div>
+      <h2>Два формата работы</h2>
+    </div>
+    <div class="price-grid">
+      <div class="price reveal">
+        <h3>Комплексный уход</h3>
+        <div class="sum">от 4 500 ₽ <small>/ сеанс</small></div>
+        <ul>
+          <li>Анатомическая стрижка по типу шерсти</li>
+          <li>Мытье профессиональной линией</li>
+          <li>Сушка, расчёс, укладка</li>
+          <li>Когти, уши, глаза</li>
+          <li>Устные рекомендации по уходу</li>
+        </ul>
+        <a href="#booking" class="btn btn-ghost">Записаться</a>
+      </div>
+      <div class="price feat reveal d1">
+        <div class="tag">Выбор 8 из 10 клиентов</div>
+        <h3>Терапевтический SPA-груминг</h3>
+        <div class="sum">от 7 000 ₽ <small>/ сеанс</small></div>
+        <ul>
+          <li>Всё из комплекса «Комплексный уход»</li>
+          <li>SPA-терапия: распаривание и озон</li>
+          <li>Массаж себумных желез, разбор колтунов</li>
+          <li>Работа с тревожностью: адаптационные паузы</li>
+          <li>Письменный план ухода на 30 дней</li>
+        </ul>
+        <a href="#booking" class="btn">Выбрать SPA</a>
+      </div>
+    </div>
+    <p class="price-note reveal">Точная стоимость фиксируется после диагностики шерсти — до начала процедур. Без сюрпризов на кассе.</p>
+  </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section id="reviews">
+  <div class="container">
+    <div class="sec-head reveal"><div class="overline">Отзывы</div><h2>Что говорят хозяева</h2></div>
+    <div class="rev-grid">
+      <div class="rev reveal"><div class="stars">★★★★★</div><p>«Пумба впервые не трясся после стрижки. Дома вышел из переноски сам и пошёл есть — раньше прятался на сутки».</p><b>Марина</b><span>шпиц Пумба, 4 года</span></div>
+      <div class="rev reveal d1"><div class="stars">★★★★★</div><p>«Кота с колтунами брались три салона и отказывались. Здесь разобрали послойно, без стрижки под ноль. Лорд даже мурлыкал на сушке».</p><b>Дмитрий</b><span>мейн-кун Лорд, 7 лет</span></div>
+      <div class="rev reveal d2"><div class="stars">★★★★★</div><p>«Мне показали, где у Джесси зажим от старого поводка, и объяснили, как он связан с колтунами за ухом. Это другой уровень уважения к собаке».</p><b>Ольга</b><span>золотистый ретривер Джесси</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LEAD MAGNET ================= -->
+<div class="leadmag">
+  <div class="bg" data-bg="images/06-spa.jpg" data-fallback="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=2000&q=80"></div>
+  <div class="container">
+    <div class="overline reveal" style="justify-content:center;color:#E4D9C6">Лид-магнит</div>
+    <h2 class="reveal d1" style="margin-top:16px">PDF-гайд «5 зон на теле собаки, где стресс превращается в колтуны»</h2>
+    <p class="reveal d2">Пришлём гайд бесплатно вместе с подтверждением записи. Проверьте своего питомца дома за 5 минут.</p>
+    <button class="btn btn-light reveal d3" id="leadBtn">Получить гайд и записаться</button>
+  </div>
+</div>
+
+<!-- ================= BOOKING ================= -->
+<section id="booking">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="overline">Форма для связи</div>
+      <h2>Запись на сеанс</h2>
+      <p class="lead">Оставьте контакты — администратор свяжется с вами в течение дня, задаст три вопроса о характере питомца и подберёт окно.</p>
+    </div>
+    <form class="form-grid reveal" id="bookForm" novalidate>
+      <div class="field"><label for="fName">Имя</label><input id="fName" name="name" type="text" placeholder="Как к вам обращаться" required><div class="msg">Укажите имя (минимум 2 символа)</div></div>
+      <div class="field"><label for="fPhone">Телефон</label><input id="fPhone" name="phone" type="tel" placeholder="+7 (___) ___-__-__" required><div class="msg">Введите номер полностью</div></div>
+      <div class="field"><label for="fPet">Питомец</label><select id="fPet" name="pet"><option>Собака</option><option>Кошка</option></select></div>
+      <div class="field"><label for="fBreed">Порода и возраст</label><input id="fBreed" name="breed" type="text" placeholder="Например: шпиц, 4 года"></div>
+      <div class="field full"><label for="fComment">Комментарий</label><textarea id="fComment" name="comment" placeholder="Характер, страхи, колтуны, опыт прошлых салонов"></textarea></div>
+      <label class="consent"><input type="checkbox" id="fConsent" checked> <span>Нажимая на кнопку, вы даёте согласие на обработку персональных данных. <a id="policyLink">Наша политика конфиденциальности</a></span></label>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-light">Отправить заявку</button>
+        <span style="font-size:13px;color:rgba(247,243,236,.5)">Свяжемся в течение дня · без спама</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container">
+    <div class="f-grid">
+      <div>
+        <div class="logo">AURA<span style="color:var(--sage)">·</span>PET</div>
+        <p>Студия бережного груминга собак и кошек.<br>Код доверия. Анатомия груминга.</p>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+        <a href="mailto:hello@aura.pet">hello@aura.pet</a>
+        <p style="margin-top:8px">Москва, ул. Тёплая, 12<br>ежедневно 10:00–21:00</p>
+      </div>
+      <div>
+        <h4>Навигация</h4>
+        <a href="#philosophy">Философия</a>
+        <a href="#services">Услуги</a>
+        <a href="#prices">Цены</a>
+        <a href="#booking">Запись</a>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2026 AURA Pet Salon. Все права защищены.</span>
+      <a id="policyLink2">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= MOBILE CTA ================= -->
+<div class="cta-bar" id="ctaBar"><a href="#booking" class="btn">Записаться на сеанс</a></div>
+
+<!-- ================= MODALS ================= -->
+<div class="modal" id="modalSuccess">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-box">
+    <button class="modal-close" data-close aria-label="Закрыть">×</button>
+    <div class="success-ico">✓</div>
+    <h3>Заявка принята!</h3>
+    <p id="successText">Спасибо! Администратор свяжется с вами в течение дня.</p>
+    <p style="font-size:12.5px;color:var(--sage-d)">Демо-режим: данные заявки выведены в консоль браузера (F12). Для боевого запуска подключите вебхук — см. README.md.</p>
+  </div>
+</div>
+<div class="modal" id="modalPolicy">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-box">
+    <button class="modal-close" data-close aria-label="Закрыть">×</button>
+    <h3>Политика конфиденциальности</h3>
+    <p>Отправляя форму, вы соглашаетесь на обработку персональных данных (имя, номер телефона, информация о питомце) исключительно для цели записи на сеанс.</p>
+    <p>Данные не передаются третьим лицам, не используются для рекламных рассылок без отдельного согласия и хранятся не дольше 12 месяцев.</p>
+    <p>Вы можете запросить удаление своих данных письмом на hello@aura.pet.</p>
+  </div>
+</div>
+
+<script>
+/* ========== 1. ЗАГРУЗЧИК ВИЗУАЛА (3-ступенчатый fallback) ========== */
+const SVG_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238FA383'/%3E%3Cstop offset='.55' stop-color='%23C9BBA4'/%3E%3Cstop offset='1' stop-color='%23E8DFD2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23g)'/%3E%3C/svg%3E";
+function chainLoad(list, onOk){
+  const srcs = list.filter(Boolean); srcs.push(SVG_FALLBACK);
+  (function tryNext(i){
+    if(i >= srcs.length) return;
+    const im = new Image();
+    im.onload  = () => onOk(srcs[i]);
+    im.onerror = () => tryNext(i+1);
+    im.src = srcs[i];
+  })(0);
+}
+document.querySelectorAll('[data-bg]').forEach(el =>
+  chainLoad([el.dataset.bg, el.dataset.fallback], src => el.style.backgroundImage = `url("${src}")`));
+document.querySelectorAll('img[data-img]').forEach(el =>
+  chainLoad([el.dataset.img, el.dataset.fallback], src => el.src = src));
+
+/* ========== 2. HEADER SCROLL ========== */
+const header = document.getElementById('header');
+addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 40), {passive:true});
+
+/* ========== 3. BURGER ========== */
+const burger = document.getElementById('burger');
+burger.addEventListener('click', () => document.body.classList.toggle('menu-open'));
+document.querySelectorAll('#mobileMenu a').forEach(a =>
+  a.addEventListener('click', () => document.body.classList.remove('menu-open')));
+
+/* ========== 4. REVEAL ON SCROLL ========== */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+}), {threshold:.14});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ========== 5. PARALLAX ========== */
+const pxEls = [...document.querySelectorAll('[data-parallax]')];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!reduce){
+  let tick = false;
+  const run = () => {
+    pxEls.forEach(el => {
+      const r = el.parentElement.getBoundingClientRect();
+      if(r.bottom < 0 || r.top > innerHeight) return;
+      el.style.transform = `translate3d(0, ${r.top * -0.07}px, 0)`;
+    });
+    tick = false;
+  };
+  addEventListener('scroll', () => { if(!tick){ tick = true; requestAnimationFrame(run); } }, {passive:true});
+  run();
+}
+
+/* ========== 6. MOBILE CTA BAR ========== */
+const ctaBar = document.getElementById('ctaBar');
+const bookingSec = document.getElementById('booking');
+new IntersectionObserver(es => es.forEach(e =>
+  ctaBar.classList.toggle('show', !e.isIntersecting)
+), {threshold:.12}).observe(bookingSec);
+
+/* ========== 7. PHONE MASK ========== */
+const phone = document.getElementById('fPhone');
+phone.addEventListener('input', e => {
+  let d = e.target.value.replace(/\D/g,'');
+  if(d.startsWith('8')) d = '7' + d.slice(1);
+  if(!d.startsWith('7')) d = '7' + d;
+  d = d.slice(0,11);
+  let v = '+7';
+  if(d.length > 1)  v += ' (' + d.slice(1,4);
+  if(d.length >= 5) v += ') ' + d.slice(4,7);
+  if(d.length >= 8) v += '-' + d.slice(7,9);
+  if(d.length >= 10)v += '-' + d.slice(9,11);
+  e.target.value = v;
+});
+
+/* ========== 8. FORM SUBMIT ========== */
+const form = document.getElementById('bookForm');
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  let ok = true;
+  const name = document.getElementById('fName');
+  const nameF = name.closest('.field'), phoneF = phone.closest('.field');
+  nameF.classList.toggle('err', !(ok = name.value.trim().length >= 2) );
+  const phoneOk = phone.value.replace(/\D/g,'').length === 11;
+  phoneF.classList.toggle('err', !phoneOk); ok = ok && phoneOk;
+  const consentOk = document.getElementById('fConsent').checked; ok = ok && consentOk;
+  if(!ok) return;
+  const payload = Object.fromEntries(new FormData(form).entries());
+  payload.date = new Date().toISOString();
+  console.log('🔥 НОВАЯ ЗАЯВКА →', payload);
+  /* TODO (боевой запуск): заменить на fetch(WEBHOOK_URL, {method:'POST', body: JSON.stringify(payload)})
+     — Telegram-бот / Tilda CRM / AmoCRM. Инструкция в README.md */
+  document.getElementById('successText').textContent =
+    `${name.value.trim()}, спасибо! Администратор свяжется с вами по номеру ${phone.value} в течение дня.`;
+  openModal('modalSuccess');
+  form.reset(); document.getElementById('fConsent').checked = true;
+});
+
+/* ========== 9. LEAD MAGNET ========== */
+document.getElementById('leadBtn').addEventListener('click', () => {
+  document.getElementById('fComment').value = 'Хочу получить PDF-гайд «5 зон стресса» + запись на сеанс.';
+  document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+});
+
+/* ========== 10. MODALS ========== */
+function openModal(id){ document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden'; }
+function closeModal(m){ m.classList.remove('open'); document.body.style.overflow=''; }
+document.querySelectorAll('.modal').forEach(m =>
+  m.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => closeModal(m))));
+addEventListener('keydown', e => { if(e.key === 'Escape') document.querySelectorAll('.modal.open').forEach(closeModal); });
+['policyLink','policyLink2'].forEach(id =>
+  document.getElementById(id).addEventListener('click', () => openModal('modalPolicy')));
+</script>
+</body>
+</html>
